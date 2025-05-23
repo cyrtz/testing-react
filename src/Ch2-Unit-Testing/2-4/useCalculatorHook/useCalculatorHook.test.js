@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import useCalculatorHook from "./useCalculatorHook";
 
 describe('useCalculatorHook', () => {
@@ -22,12 +22,12 @@ describe('useCalculatorHook', () => {
                 </div>
             )
         };
-        render(<TestComponent />);
+        const { getByTestId } = render(<TestComponent />);
 
-        fireEvent.change(screen.getByTestId('number1'), { target: { value: 5 } });
-        fireEvent.change(screen.getByTestId('operator'), { target: { value: '+' } });
-        fireEvent.change(screen.getByTestId('number2'), { target: { value: 3 } });
-        fireEvent.click(screen.getByTestId('calculate'));
-        expect(screen.getByTestId('result')).toHaveTextContent('8');
+        fireEvent.change(getByTestId('number1'), { target: { value: 5 } });
+        fireEvent.change(getByTestId('operator'), { target: { value: '+' } });
+        fireEvent.change(getByTestId('number2'), { target: { value: 3 } });
+        fireEvent.click(getByTestId('calculate'));
+        expect(getByTestId('result')).toHaveTextContent('8');
     });
 });

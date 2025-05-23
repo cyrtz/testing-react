@@ -1,6 +1,6 @@
 import React from "react";
 import Counter from './Counter-enhanced';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 describe('Counter Component', () => {
     xit('should match snapshot', () => {
@@ -12,12 +12,14 @@ describe('Counter Component', () => {
         let counter;
         const renderCounter = () => <Counter />;
 
-        counter = render(renderCounter());
+        beforeEach(() =>{
+            counter = render(renderCounter());
+        });
 
         it('should get 1 when click the increment button', () => {
             const { getByTestId } = counter;
-            fireEvent.click(screen.getByTestId('increment-button'));
-            expect(screen.getByTestId('counter-value')).toHaveTextContent('1');
+            fireEvent.click(getByTestId('increment-button'));
+            expect(getByTestId('counter-value')).toHaveTextContent('1');
         });
     });
 });
