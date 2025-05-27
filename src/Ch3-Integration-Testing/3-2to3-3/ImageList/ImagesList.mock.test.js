@@ -1,5 +1,5 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import React, { act } from "react";
+import { render } from "@testing-library/react";
 import ImageList from "./ImageList";
 
 jest.mock('./ImageItem', () => () => (
@@ -7,8 +7,8 @@ jest.mock('./ImageItem', () => () => (
 ));
 
 describe('ImageList', () => {
-    it('should render correct image items when have data', async () =>{
-        global.fetch = jest.fn().mockImplementation(() => 
+    it('should render correct image items when have data', async () => {
+        global.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve({
                 json: () => Promise.resolve({
                     products: [
@@ -26,9 +26,8 @@ describe('ImageList', () => {
                 }),
             })
         );
-        render(<ImageList />);
 
-        const imageItems = await screen.findAllByTestId('image-item-title');
-        expect(imageItems).toHaveLength(2);
+        const { getAllByTestId } = await act(async () => render(<ImageList />));
+        expect(getAllByTestId('image-item-title')).toHaveLength(2);
     })
 })

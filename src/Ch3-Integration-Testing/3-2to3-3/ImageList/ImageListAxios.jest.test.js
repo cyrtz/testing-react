@@ -1,5 +1,5 @@
 import React, { act } from "react";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import ImageList from "./ImageListAxios";
 import axios from "axios";
 

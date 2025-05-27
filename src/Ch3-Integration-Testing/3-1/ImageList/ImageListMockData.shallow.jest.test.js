@@ -7,9 +7,8 @@ describe('ImageList', () => {
         const renderer = new ShallowRenderer();
         const mockedData = { products: [] };
 
-        renderer.render(<ImageList data={mockedData} />);
-        const view = renderer.getRenderOutput();
-        expect(view).toMatchSnapshot();
+        const wrapper = renderer.render(<ImageList data={mockedData} />);
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('should render correct image items when have data', async () => {
@@ -28,8 +27,7 @@ describe('ImageList', () => {
                 },
             ],
         };
-        renderer.render(<ImageList data={mockedData} />);
-        const view = renderer.getRenderOutput();
-        expect(view).toMatchSnapshot();
+        const wrapper = renderer.render(<ImageList data={mockedData} />);
+        expect(wrapper).toMatchSnapshot();
     })
 })
